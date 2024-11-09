@@ -1,12 +1,13 @@
 import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 import { Search } from "lucide-react";
 
-function SearchSidebar() {
+function SearchSidebar({ className }: { className?: string }) {
   return (
-    <div className="relative">
+    <div className={cn(`relative`, className)}>
       <Input
         placeholder="Search"
-        className="rounded-md border bg-[#F8F8F8] pl-10 pr-4 text-gray-700 focus:outline-none focus-visible:ring-0"
+        className="rounded-md border pl-10 pr-4 text-gray-700 focus:outline-none focus-visible:ring-0"
       />
       <Search
         size={18}

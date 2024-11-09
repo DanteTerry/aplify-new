@@ -1,4 +1,4 @@
 function ApplicationPage() {
-  return <div>ApplicationPage</div>;
+  return <div className="">ApplicationPage</div>;
 }
 export default ApplicationPage;

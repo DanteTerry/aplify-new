@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 function SidebarLinks() {
   const pathname = usePathname();
   return (
-    <div className="flex w-full flex-col gap-1 px-4 py-2 xl:py-3">
+    <div className="mt-2 flex w-full flex-col gap-1 px-4 py-2 xl:py-3">
       {linkDetails.map((link, index) => (
         <Button
           asChild
