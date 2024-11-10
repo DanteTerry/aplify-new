@@ -18,7 +18,7 @@ function Navbar() {
       </Link>
 
       {/* Navigation Links */}
-      <div className="flex flex-1 items-center justify-center gap-4">
+      <div className="hidden flex-1 items-center justify-center gap-4 md:flex">
         {navLinks.map((link, index) => (
           <Link
             key={index}
