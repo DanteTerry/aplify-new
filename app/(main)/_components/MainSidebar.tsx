@@ -8,7 +8,7 @@ import SidebarBottomButtons from "./SidebarBottomButtons";
 function MainSidebar() {
   return (
     <div
-      className={`font-inter fixed left-0 top-0 hidden h-screen w-60 flex-col items-center gap-3 overflow-y-auto border-r bg-white text-white md:flex`}
+      className={`fixed left-0 top-0 hidden h-screen w-60 flex-col items-center gap-3 overflow-y-auto border-r bg-white font-inter text-white md:flex`}
     >
       {/* Sidebar user button */}
       <div className="w-full px-4 py-2 xl:py-3">
