@@ -14,6 +14,13 @@ import { useState } from "react";
 
 function SidebarButtons() {
   const [open, setOpen] = useState(false);
+  const [selectedButton, setSelectedButton] = useState("");
+
+  const handleButtonClick = (buttonName: string) => {
+    setOpen(true);
+    setSelectedButton(buttonName);
+  };
+
   return (
     <div className="mt-2 flex w-full flex-col gap-2 px-4 py-2 xl:py-3">
       <SearchSidebar />
@@ -21,7 +28,7 @@ function SidebarButtons() {
         {buttonDetails.map((button, index) => (
           <Button
             key={index}
-            onClick={() => setOpen(true)}
+            onClick={() => handleButtonClick(button.name)}
             size="sm"
             variant="ghost"
             className="justify-start text-gray-600 hover:text-gray-900"
@@ -34,7 +41,7 @@ function SidebarButtons() {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Are you absolutely sure?</DialogTitle>
+            <DialogTitle>{selectedButton}</DialogTitle>
             <DialogDescription>
               This action cannot be undone. This will permanently delete your
               account and remove your data from our servers.
@@ -45,4 +52,5 @@ function SidebarButtons() {
     </div>
   );
 }
+
 export default SidebarButtons;
