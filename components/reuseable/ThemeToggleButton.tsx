@@ -5,12 +5,16 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useEffect, useState } from "react";
-import { IoMdSunny, IoMdMoon } from "react-icons/io";
+import { Sun, SunMoon } from "lucide-react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
-function ThemeToggleButton() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
+function ThemeToggleButton({
+  isDarkMode,
+  setIsDarkMode,
+}: {
+  isDarkMode: boolean;
+  setIsDarkMode: Dispatch<SetStateAction<boolean>>;
+}) {
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
     if (storedTheme === "dark") {
@@ -34,23 +38,24 @@ function ThemeToggleButton() {
 
   return (
     <div className="">
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger>
-            <div
-              onClick={toggleDarkMode}
-              className="cursor-pointer text-xl text-gray-800 transition-transform duration-200 hover:scale-110 dark:text-gray-200"
-            >
-              {isDarkMode ? <IoMdSunny size={30} /> : <IoMdMoon size={30} />}
-            </div>
-          </TooltipTrigger>
-          <TooltipContent className="top-5 mb-4">
-            <p className="font-semibold text-white dark:text-black">
-              {isDarkMode ? "Light mode" : "Dark mode"}
-            </p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      <button
+        onClick={toggleDarkMode}
+        className="rounded-lg p-2 transition-all duration-300 hover:bg-gray-300/20 dark:hover:bg-[#2A2A3A]"
+      >
+        {isDarkMode ? (
+          <Sun
+            size={24}
+            color={isDarkMode ? "#9D87FE" : "#3C4451"}
+            fill={isDarkMode ? "#1c1c1d" : "#D1D4D9"}
+          />
+        ) : (
+          <SunMoon
+            size={24}
+            color={isDarkMode ? "#9D87FE" : "#3C4451"}
+            fill={isDarkMode ? "#1c1c1d" : "#D1D4D9"}
+          />
+        )}
+      </button>
     </div>
   );
 }

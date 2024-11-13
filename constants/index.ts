@@ -5,10 +5,11 @@ import {
   PlusCircle,
   Settings,
   Trash,
+  Search,
   CircleHelp,
   MessageSquareMore,
 } from "lucide-react";
-import { RxDashboard } from "react-icons/rx";
+import { LayoutDashboard } from "lucide-react";
 
 // Navbar Links
 export const navLinks = [
@@ -32,6 +33,10 @@ export const navLinks = [
 
 export const buttonDetails = [
   {
+    name: "Search",
+    icon: Search,
+  },
+  {
     name: "Settings",
     icon: Settings,
   },
@@ -50,7 +55,7 @@ export const buttonDetails = [
 export const linkDetails = [
   {
     name: "Dashboard",
-    icon: RxDashboard,
+    icon: LayoutDashboard,
     href: "/dashboard",
   },
   {
@@ -72,12 +77,11 @@ export const linkDetails = [
 
 export const endButtonDetails = [
   {
-    name: "Support",
-    icon: CircleHelp,
-  },
-
-  {
     name: "Feedback",
     icon: MessageSquareMore,
+  },
+  {
+    name: "Support",
+    icon: CircleHelp,
   },
 ];

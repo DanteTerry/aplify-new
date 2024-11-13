@@ -7,7 +7,7 @@ import MobileSidebar from "./MobileSidebar";
 
 function MainTopBar() {
   return (
-    <div className="flex w-full items-center justify-between border-b bg-gray-50 px-2 py-3 shadow-md xl:px-6 xl:py-4">
+    <div className="flex w-full items-center justify-between border-b bg-[#EAE9E3] px-2 py-3 xl:px-6 xl:py-4">
       <div className="flex items-center gap-2 sm:gap-4 md:hidden">
         <MobileSidebar />
         <SearchSidebar className="flex w-5/6 sm:w-full md:hidden" />

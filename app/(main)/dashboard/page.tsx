@@ -2,7 +2,7 @@ import { signOut } from "@/auth";
 
 function DashboardPage() {
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center bg-[#F8F8F8]">
+    <div className="flex h-full w-full flex-col items-center justify-center">
       <h2 className="text-2xl font-semibold">Welcome to Aplify!</h2>
       <p className="mt-2 text-center text-lg text-gray-600">
         We&apos;re glad to have you here. Explore the features and start

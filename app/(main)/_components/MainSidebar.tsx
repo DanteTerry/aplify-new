@@ -7,7 +7,7 @@ import SidebarBottomButtons from "./SidebarBottomButtons";
 
 function MainSidebar() {
   return (
-    <div
+    <aside
       className={`fixed left-0 top-0 hidden h-screen w-60 flex-col items-center gap-3 overflow-y-auto border-r bg-white font-inter text-white md:flex`}
     >
       {/* Sidebar user button */}
@@ -29,7 +29,7 @@ function MainSidebar() {
       <SidebarLinks />
       {/* Sidebar Feedback and support buttons */}
       <SidebarBottomButtons />
-    </div>
+    </aside>
   );
 }
 export default MainSidebar;

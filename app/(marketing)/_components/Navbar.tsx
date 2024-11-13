@@ -7,12 +7,13 @@ function Navbar() {
     <nav className="fixed left-0 right-0 top-0 z-50 flex w-full items-center justify-between border-b bg-white px-4 py-3 shadow-sm dark:border-gray-800 dark:bg-[#0A0A0A] sm:px-6 lg:px-8">
       {/* Logo */}
       <Link href="/" className="flex cursor-pointer items-center gap-2">
-        <div className="rounded-md bg-black px-2 py-2 dark:bg-[#1f1f1f]">
+        <div className="rounded-md bg-black p-1 dark:bg-[#1f1f1f]">
           <Image
             src={"/logo/aplify.png"}
             alt="Taskify"
-            width={30}
-            height={30}
+            width={33}
+            height={33}
+            sizes="33px"
           />
         </div>
       </Link>
