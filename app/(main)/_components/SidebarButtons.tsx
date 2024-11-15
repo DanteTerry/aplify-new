@@ -1,18 +1,21 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import SearchSidebar from "./SearchSidebar";
-import { buttonDetails } from "@/constants";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { useState } from "react";
 
-function SidebarButtons() {
+import { buttonDetails } from "@/constants";
+import { Dialog } from "@/components/ui/dialog";
+import { Dispatch, SetStateAction, useState } from "react";
+import { cn } from "@/lib/utils";
+import Trash from "./Trash";
+import NewApplication from "./NewApplication";
+
+function SidebarButtons({
+  isSidebarOpen,
+  isDarkMode,
+  setIsSidebarOpen,
+}: {
+  isSidebarOpen: boolean;
+  isDarkMode: boolean;
+  setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
+}) {
   const [open, setOpen] = useState(false);
   const [selectedButton, setSelectedButton] = useState("");
 
@@ -21,35 +24,33 @@ function SidebarButtons() {
     setSelectedButton(buttonName);
   };
 
+  const iconColor = isDarkMode ? "#9D87FE" : "#3C4451";
+  const iconFill = isDarkMode ? "#2A2A3A" : "#E5E7EB";
+
   return (
-    <div className="mt-2 flex w-full flex-col gap-2 px-4 py-2 xl:py-3">
-      <SearchSidebar />
-      <div className="flex flex-col gap-1">
-        {buttonDetails.map((button, index) => (
-          <Button
-            key={index}
+    <>
+      <div className="flex w-full flex-col items-center gap-1 px-2">
+        {buttonDetails.map((button) => (
+          <button
+            key={button.name}
             onClick={() => handleButtonClick(button.name)}
-            size="sm"
-            variant="ghost"
-            className="justify-start text-gray-600 hover:text-gray-900"
+            className={cn(
+              "flex w-full items-center gap-3 rounded-lg p-2 text-[#3C4451] transition-all duration-300 hover:bg-gray-300/20 dark:text-[#8f8f9a] dark:hover:bg-[#2A2A3A]",
+              !isSidebarOpen && "w-max justify-center",
+            )}
           >
-            <button.icon size={18} className="mr-2" />
-            <span className="text-sm font-medium">{button.name}</span>
-          </Button>
+            <button.icon size={20} color={iconColor} fill={iconFill} />
+            {isSidebarOpen && (
+              <span className="whitespace-nowrap text-sm">{button.name}</span>
+            )}
+          </button>
         ))}
       </div>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>{selectedButton}</DialogTitle>
-            <DialogDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
+        {selectedButton === "New Application" && <NewApplication />}
+        {selectedButton === "Trash" && <Trash />}
       </Dialog>
-    </div>
+    </>
   );
 }
 

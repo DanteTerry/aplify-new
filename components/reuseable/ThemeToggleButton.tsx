@@ -51,7 +51,7 @@ function ThemeToggleButton({
         ) : (
           <SunMoon
             size={24}
-            color={isDarkMode ? "#9D87FE" : "#3C4451"}
+            color={isDarkMode ? "#2A2A3A" : "#3C4451"}
             fill={isDarkMode ? "#1c1c1d" : "#D1D4D9"}
           />
         )}

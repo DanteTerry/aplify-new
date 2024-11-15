@@ -1,15 +1,17 @@
+import { GearIcon } from "@radix-ui/react-icons";
 import {
   BriefcaseBusiness,
   FileText,
   Folder,
   PlusCircle,
   Settings,
+  Sparkles,
   Trash,
-  Search,
   CircleHelp,
   MessageSquareMore,
 } from "lucide-react";
 import { LayoutDashboard } from "lucide-react";
+import { RxDashboard } from "react-icons/rx";
 
 // Navbar Links
 export const navLinks = [
@@ -33,29 +35,19 @@ export const navLinks = [
 
 export const buttonDetails = [
   {
-    name: "Search",
-    icon: Search,
+    name: "New Application",
+    icon: PlusCircle,
   },
-  {
-    name: "Settings",
-    icon: Settings,
-  },
-
   {
     name: "Trash",
     icon: Trash,
-  },
-
-  {
-    name: "New Application",
-    icon: PlusCircle,
   },
 ];
 
 export const linkDetails = [
   {
     name: "Dashboard",
-    icon: LayoutDashboard,
+    icon: RxDashboard,
     href: "/dashboard",
   },
   {
@@ -72,6 +64,16 @@ export const linkDetails = [
     name: "Search Jobs",
     icon: BriefcaseBusiness,
     href: "/search-jobs",
+  },
+  {
+    name: "Builder",
+    icon: Sparkles,
+    href: "/builder",
+  },
+  {
+    name: "Settings",
+    icon: Settings,
+    href: "/settings",
   },
 ];
 

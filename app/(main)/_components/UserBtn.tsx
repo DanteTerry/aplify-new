@@ -1,3 +1,5 @@
+"use server";
+
 import { auth, signOut } from "@/auth";
 import {
   DropdownMenu,

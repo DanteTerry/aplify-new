@@ -1,4 +1,5 @@
 import {
+  addApplicationSchema,
   loginSchema,
   newPasswordSchema,
   registerSchema,
@@ -17,3 +18,6 @@ export type TResetSchema = z.infer<typeof resetSchema>;
 
 // New password Type
 export type TNewPasswordSchema = z.infer<typeof newPasswordSchema>;
+
+// New Application Type
+export type TAddApplicationSchema = z.infer<typeof addApplicationSchema>;

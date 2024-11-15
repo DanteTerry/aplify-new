@@ -6,7 +6,6 @@ import SidebarThird from "./_components/SidebarThird";
 
 function MainLayout({ children }: { children: React.ReactNode }) {
   return (
-    // p-3 padding if sidebar second
     <main className="relative flex h-full w-full">
       {/* <SidebarOne /> */}
       {/* <MainSidebar /> */}
