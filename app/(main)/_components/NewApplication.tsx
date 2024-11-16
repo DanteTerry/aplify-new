@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Progress } from "@/components/ui/progress";
 import {
@@ -16,10 +16,13 @@ import {
   FileSliders,
   ListCollapse,
 } from "lucide-react";
-
 import NewApplicationContent from "./NewApplicationContent";
 
-function NewApplication() {
+function NewApplication({
+  setOpen,
+}: {
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}) {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const iconColor = isDarkMode ? "#818cf8" : "#4f46e5";
   const [step, setStep] = useState(1);
@@ -83,7 +86,7 @@ function NewApplication() {
         {/* Main Content */}
         <div className="col-span-4 flex w-full flex-col items-end justify-center gap-3 rounded-lg bg-white p-5 dark:bg-[#252736]">
           <div className="w-full rounded-lg bg-white p-6 dark:bg-[#252736]">
-            <NewApplicationContent step={step} setStep={setStep} />
+            <NewApplicationContent step={step} setStep={setStep} setOpen={setOpen} />
           </div>
         </div>
       </div>

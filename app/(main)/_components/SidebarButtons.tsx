@@ -47,7 +47,9 @@ function SidebarButtons({
         ))}
       </div>
       <Dialog open={open} onOpenChange={setOpen}>
-        {selectedButton === "New Application" && <NewApplication />}
+        {selectedButton === "New Application" && (
+          <NewApplication setOpen={setOpen} />
+        )}
         {selectedButton === "Trash" && <Trash />}
       </Dialog>
     </>

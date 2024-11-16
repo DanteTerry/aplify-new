@@ -1,4 +1,5 @@
 import { signOut } from "@/auth";
+import { Button } from "@/components/ui/button";
 
 function DashboardPage() {
   return (
@@ -8,7 +9,6 @@ function DashboardPage() {
         We&apos;re glad to have you here. Explore the features and start
         building your projects efficiently.
       </p>
-
       <form
         action={async () => {
           "use server";
@@ -17,7 +17,7 @@ function DashboardPage() {
           });
         }}
       >
-        <button type="submit">Logout</button>
+        <Button type="submit">Logout</Button>
       </form>
     </div>
   );

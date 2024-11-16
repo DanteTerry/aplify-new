@@ -1,6 +1,14 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Dispatch, SetStateAction, useState } from "react";
+import { Calendar } from "@/components/ui/calendar";
+import { CalendarIcon, FileUp, Loader } from "lucide-react";
+import { format, formatDate } from "date-fns";
+import { cn } from "@/lib/utils";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { addApplicationSchema } from "@/schema/schema";
+import { TAddApplicationSchema } from "@/types/types";
 import {
   Select,
   SelectContent,
@@ -13,34 +21,41 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import { CalendarIcon, FileUp } from "lucide-react";
-import { format } from "date-fns";
-import { cn } from "@/lib/utils";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { addApplicationSchema } from "@/schema/schema";
-import { TAddApplicationSchema } from "@/types/types";
+import { addNewJobApplication } from "@/actions/job-application";
+import { uploadFile } from "@/utils/newApplicaiton";
+import { toast } from "sonner";
 
 function NewApplicationContent({
   step,
+  setOpen,
   setStep,
 }: {
   step: number;
   setStep: Dispatch<SetStateAction<number>>;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
+  // states for form fields
   const [date, setDate] = useState<Date>();
   const [followUpDate, setFollowUpDate] = useState<Date>();
+  const [currency, setCurrency] = useState<string>("");
+  const [jobStatus, setJobStatus] = useState<string>("");
+  const [jobType, setJobType] = useState<string>("");
+  const [resume, setResume] = useState<File | null>(null);
+  const [coverLetter, setCoverLetter] = useState<File | null>(null);
+  const [otherFiles, setOtherFiles] = useState<File[] | null>(null);
 
+  // form validation
   const {
     register,
     trigger,
     handleSubmit,
     formState: { errors, isSubmitting },
+    reset,
   } = useForm<TAddApplicationSchema>({
     resolver: zodResolver(addApplicationSchema),
   });
 
+  // handle continue button click
   const handleContinue = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     let fieldsToValidate: (keyof TAddApplicationSchema)[] = [];
@@ -53,20 +68,61 @@ function NewApplicationContent({
     if (isValid && step < 4) setStep((prev) => prev + 1);
   };
 
+  // handle back button click
   const handleBack = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (step > 1) setStep((prev) => prev - 1);
   };
 
-  const onSubmit: SubmitHandler<TAddApplicationSchema> = (data) => {
-    console.log(data);
+  // handle file change
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, files } = e.target;
+    if (files && files.length > 0) {
+      if (name === "resume") {
+        setResume(files[0]);
+      } else if (name === "coverLetter") {
+        setCoverLetter(files[0]);
+      } else if (name === "otherFiles") {
+        setOtherFiles(Array.from(files));
+      }
+    }
+  };
+
+  // form submit handler
+  const onSubmit: SubmitHandler<TAddApplicationSchema> = async (data) => {
+    const resumeLink = await uploadFile(resume as File);
+    const coverLetterLink = await uploadFile(coverLetter as File);
+    const otherFilesLink = await Promise.all(
+      (otherFiles as File[]).map((file) => uploadFile(file)),
+    );
+
+    const applicationData = {
+      ...data,
+      userId: "",
+      salary: `${currency} ${data.salary}`,
+      jobStatus,
+      dateApplied: date || new Date(),
+      jobType,
+      followUpDate: followUpDate || new Date(),
+      resume: resumeLink.fileUrl,
+      coverLetter: coverLetterLink.fileUrl,
+      otherFiles: otherFilesLink.map((file) => file.fileUrl as string),
+    };
+
+    try {
+      const result = await addNewJobApplication(applicationData);
+      if (result.success) {
+        toast.success("Application added successfully!");
+        reset();
+        setOpen(false);
+      }
+    } catch (error) {
+      console.error("Failed to add new job application:", error);
+    }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex max-h-[500px] flex-col gap-3"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
       {/* step 1  */}
       {step === 1 && (
         <>
@@ -119,13 +175,14 @@ function NewApplicationContent({
               Salary (Per Annum)
             </label>
             <div className="flex items-center gap-2">
-              <Select>
+              <Select onValueChange={setCurrency}>
                 <SelectTrigger className="h-10 w-[100px] rounded-md border border-gray-300 px-2 text-sm text-gray-700 focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-[#2A2A3A] dark:text-gray-100">
                   <SelectValue placeholder="Currency" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="USD">USD</SelectItem>
                   <SelectItem value="EUR">EUR</SelectItem>
+                  <SelectItem value="INR">INR</SelectItem>
                   <SelectItem value="GBP">GBP</SelectItem>
                   <SelectItem value="JPY">JPY</SelectItem>
                   <SelectItem value="AUD">AUD</SelectItem>
@@ -154,7 +211,7 @@ function NewApplicationContent({
             >
               Job Status
             </label>
-            <Select>
+            <Select onValueChange={setJobStatus}>
               <SelectTrigger className="h-10 rounded-md border border-[#d1d4d9] bg-white px-3 text-sm text-[#3C4451] dark:border-gray-500/10 dark:bg-[#2A2A3A] dark:text-white">
                 <SelectValue placeholder="Select Job Status" />
               </SelectTrigger>
@@ -215,7 +272,7 @@ function NewApplicationContent({
             >
               Job Type
             </label>
-            <Select>
+            <Select onValueChange={setJobType}>
               <SelectTrigger className="h-10 rounded-md border border-[#d1d4d9] bg-white px-3 text-sm text-[#3C4451] dark:border-gray-500/10 dark:bg-[#2A2A3A] dark:text-white">
                 <SelectValue placeholder="Select Job Type" />
               </SelectTrigger>
@@ -412,6 +469,8 @@ function NewApplicationContent({
           </div>
         </>
       )}
+
+      {/* step 4 */}
       {step === 4 && (
         <>
           <div className="flex flex-col gap-1">
@@ -424,96 +483,85 @@ function NewApplicationContent({
             <input
               type="text"
               id="portfolio"
-              placeholder="https://portfolio.com/username"
+              placeholder="https://portfolio.com"
               className="h-10 rounded-md border border-gray-300 px-3 text-sm text-gray-700 focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-[#2A2A3A] dark:text-gray-100"
               {...register("portfolio")}
             />
           </div>
+
+          {/* resume */}
           <div className="flex flex-col gap-1">
             <label
               htmlFor="resume"
               className="text-sm font-medium text-gray-700 dark:text-gray-300"
             >
-              Upload Resume
+              Resume
             </label>
-
             <input
               type="file"
-              id="resume-upload"
-              name="resume-upload"
+              id="resume"
+              name="resume"
+              onChange={handleFileChange}
               className="hidden"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  console.log(file.name);
-                  // Handle file upload logic here
-                }
-              }}
             />
             <label
-              htmlFor="resume-upload"
-              className="flex cursor-pointer items-center justify-center gap-2 rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-300 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:border-gray-600 dark:bg-[#2A2A3A] dark:text-gray-100 dark:hover:bg-gray-700"
+              htmlFor="resume"
+              className="flex h-10 cursor-pointer items-center justify-center gap-2 rounded-md border border-gray-300 px-3 text-sm text-gray-700 focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-[#2A2A3A] dark:text-gray-100"
             >
-              <FileUp size={18} /> Upload File
+              <FileUp size={16} /> {resume ? resume.name : "Upload"}
             </label>
           </div>
+
           <div className="flex flex-col gap-1">
             <label
-              htmlFor="cover-letter-upload"
+              htmlFor="coverLetter"
               className="text-sm font-medium text-gray-700 dark:text-gray-300"
             >
               Cover Letter
             </label>
-
             <input
               type="file"
-              id="cover-letter-upload"
-              name="cover-letter-upload"
+              id="coverLetter"
+              name="coverLetter"
+              onChange={handleFileChange}
               className="hidden"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  console.log(file.name);
-                  // Handle file upload logic here
-                }
-              }}
             />
             <label
-              htmlFor="cover-letter-upload"
-              className="flex cursor-pointer items-center justify-center gap-2 rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-300 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:border-gray-600 dark:bg-[#2A2A3A] dark:text-gray-100 dark:hover:bg-gray-700"
+              htmlFor="coverLetter"
+              className="flex h-10 cursor-pointer items-center justify-center gap-2 rounded-md border border-gray-300 px-3 text-sm text-gray-700 focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-[#2A2A3A] dark:text-gray-100"
             >
-              <FileUp size={18} /> Upload File
+              <FileUp size={16} /> {coverLetter ? coverLetter.name : "Upload"}
             </label>
           </div>
+
           <div className="flex flex-col gap-1">
             <label
-              htmlFor="other-files-upload"
+              htmlFor="otherFiles"
               className="text-sm font-medium text-gray-700 dark:text-gray-300"
             >
               Other Files
             </label>
-
             <input
               type="file"
-              id="other-files-upload"
-              name="other-files-upload"
+              id="otherFiles"
+              name="otherFiles"
+              multiple
+              onChange={handleFileChange}
               className="hidden"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  console.log(file.name);
-                  // Handle file upload logic here
-                }
-              }}
             />
             <label
-              htmlFor="other-files-upload"
-              className="flex cursor-pointer items-center justify-center gap-2 rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-300 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:border-gray-600 dark:bg-[#2A2A3A] dark:text-gray-100 dark:hover:bg-gray-700"
+              htmlFor="otherFiles"
+              className="flex h-10 cursor-pointer items-center justify-center gap-2 rounded-md border border-gray-300 px-3 text-sm text-gray-700 focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-[#2A2A3A] dark:text-gray-100"
             >
-              <FileUp size={18} /> Upload File
+              <FileUp size={16} />
+              {otherFiles && otherFiles.length > 0
+                ? `${otherFiles.length} files selected`
+                : "Upload"}
             </label>
           </div>
-          <div className="flex flex-col gap-1 pb-2">
+
+          {/* document notes */}
+          <div className="flex flex-col gap-1 pb-1.5">
             <label
               htmlFor="documentNotes"
               className="text-sm font-medium text-gray-700 dark:text-gray-300"
@@ -523,7 +571,7 @@ function NewApplicationContent({
             <textarea
               id="documentNotes"
               placeholder="Add any notes or comments here"
-              className="h-16 rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-[#2A2A3A] dark:text-gray-100"
+              className="max-h-16 rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-700 focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-600 dark:bg-[#2A2A3A] dark:text-gray-100"
               {...register("documentNotes")}
             />
           </div>
@@ -550,7 +598,11 @@ function NewApplicationContent({
             type="submit"
             className="h-10 w-24 rounded-md bg-green-500 px-5 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-green-600 hover:shadow-md"
           >
-            Submit
+            {isSubmitting ? (
+              <Loader size={25} className="animate-spin" />
+            ) : (
+              "Submit"
+            )}
           </Button>
         )}
       </div>

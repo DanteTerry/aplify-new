@@ -21,3 +21,29 @@ export type TNewPasswordSchema = z.infer<typeof newPasswordSchema>;
 
 // New Application Type
 export type TAddApplicationSchema = z.infer<typeof addApplicationSchema>;
+
+// New Application type
+export type JobApplication = {
+  userId: string;
+  jobTitle: string;
+  companyName: string;
+  salary?: string;
+  jobStatus: string;
+  dateApplied: Date;
+  jobType?: string;
+  location?: string;
+  country?: string;
+  jobLink?: string;
+  followUpDate?: Date;
+  notes?: string;
+  recruiterName?: string;
+  contactEmail?: string;
+  contactPhone?: string;
+  address?: string;
+  linkedinProfile?: string;
+  portfolio?: string;
+  resume?: string;
+  coverLetter?: string;
+  otherFiles: string[];
+  documentNotes?: string;
+};

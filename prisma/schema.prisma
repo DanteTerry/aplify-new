@@ -24,6 +24,7 @@ model User {
   password  String?
   role    UserRole   @default(USER)
   accounts  Account[]
+  jobApplication JobApplication[]
 } 
 
 
@@ -61,7 +62,6 @@ model VerificationToken {
 }
 
 // Password Reset Token model
-
 model PasswordResetToken {
   id        String    @id @default(cuid())
   email     String
@@ -70,5 +70,37 @@ model PasswordResetToken {
 
   @@unique([email, token])
 }
+
+
+// Job Applicaiton model
+model JobApplication {
+  id              String    @id @default(cuid())
+  userId          String    @map("user_id")
+  jobTitle        String
+  companyName     String
+  salary          String?
+  jobStatus       String
+  dateApplied     DateTime
+  jobType         String?
+  location        String?
+  country         String?
+  jobLink         String?
+  followUpDate    DateTime?
+  notes           String?
+  recruiterName   String?
+  contactEmail    String?
+  contactPhone    String?
+  address         String?
+  linkedinProfile String?
+  portfolio       String?
+  resume          String?
+  coverLetter     String?
+  otherFiles      String[]
+  documentNotes   String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+
 
 

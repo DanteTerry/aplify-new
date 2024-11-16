@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Gabarito, Inter } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
+import { Toaster } from "@/components/ui/sonner";
 
 const gabarito = Gabarito({
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -33,6 +34,7 @@ export default async function RootLayout({
         className={` ${gabarito.className} bg-[#EAE9E3] ${inter.variable} -z-50 h-full antialiased dark:bg-[#0A0A0A]`}
       >
         <SessionProvider> {children}</SessionProvider>
+        <Toaster />
       </body>
     </html>
   );
