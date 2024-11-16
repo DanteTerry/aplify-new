@@ -38,30 +38,47 @@ export const addApplicationSchema = z.object({
     .string({
       required_error: "Job title is required",
     })
-    .min(1),
+    .min(1, "Job title must be at least 1 character"),
   companyName: z
     .string({
       required_error: "Company name is required",
     })
-    .min(1),
+    .min(1, "Company name must be at least 1 character"),
   salary: z
-    .number()
-    .positive("Salary must be a positive number")
-    .optional()
-    .or(z.string().optional()),
-  jobStatus: z.string().optional(),
-  appliedDate: z.string().optional(),
-  jobType: z.string().optional(),
+    .union([
+      z.number().positive("Salary must be a positive number"),
+      z.string().optional(),
+    ])
+    .optional(),
   location: z.string().optional(),
   country: z.string().optional(),
-  jobLink: z.string().url("Invalid URL").optional(),
-  followUpDate: z.string().optional(),
+  jobLink: z
+    .string()
+    .optional()
+    .refine((val) => !val || z.string().url().safeParse(val).success, {
+      message: "Invalid URL",
+    }),
   notes: z.string().optional(),
   recruiterName: z.string().optional(),
-  contactEmail: z.string().email("Invalid email address").optional(),
+  contactEmail: z
+    .string()
+    .optional()
+    .refine((val) => !val || z.string().email().safeParse(val).success, {
+      message: "Invalid email address",
+    }),
   contactPhone: z.string().optional(),
   address: z.string().optional(),
-  linkedinProfile: z.string().url("Invalid URL").optional(),
-  portfolio: z.string().url("Invalid URL").optional(),
+  linkedinProfile: z
+    .string()
+    .optional()
+    .refine((val) => !val || z.string().url().safeParse(val).success, {
+      message: "Invalid URL",
+    }),
+  portfolio: z
+    .string()
+    .optional()
+    .refine((val) => !val || z.string().url().safeParse(val).success, {
+      message: "Invalid URL",
+    }),
   documentNotes: z.string().optional(),
 });

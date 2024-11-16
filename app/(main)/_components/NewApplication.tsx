@@ -46,13 +46,13 @@ function NewApplication() {
                   { label: "Contact Information", icon: CircleUser },
                   { label: "Application Documents", icon: FileSliders },
                 ].map((item, index) => (
-                  <button
+                  <div
                     key={index}
                     className={cn(
                       "flex w-full items-center justify-between gap-3 rounded-lg p-3 transition-all duration-300",
                       step === index + 1
                         ? "bg-[#e2e8f0] text-[#3C4451] dark:bg-[#2a2a3a] dark:text-[#8f8f9a]"
-                        : "text-[#3C4451] hover:bg-[#e2e8f0] dark:text-[#8f8f9a] dark:hover:bg-[#2a2a3a]",
+                        : "text-[#3C4451] dark:text-[#8f8f9a]",
                       "text-sm font-medium",
                     )}
                   >
@@ -61,7 +61,7 @@ function NewApplication() {
                       <span>{item.label}</span>
                     </div>
                     {step > index + 1 && <Check color="#22c55e" size={15} />}
-                  </button>
+                  </div>
                 ))}
               </div>
             </div>
@@ -81,7 +81,11 @@ function NewApplication() {
         </div>
 
         {/* Main Content */}
-        <NewApplicationContent step={step} setStep={setStep} />
+        <div className="col-span-4 flex w-full flex-col items-end justify-center gap-3 rounded-lg bg-white p-5 dark:bg-[#252736]">
+          <div className="w-full rounded-lg bg-white p-6 dark:bg-[#252736]">
+            <NewApplicationContent step={step} setStep={setStep} />
+          </div>
+        </div>
       </div>
     </DialogContent>
   );
