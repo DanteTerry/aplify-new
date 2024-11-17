@@ -1,19 +1,31 @@
 import { Button } from "@/components/ui/button";
 import { endButtonDetails } from "@/constants";
+import { cn } from "@/lib/utils";
 
-function SidebarBottomButtons() {
+function SidebarBottomButtons({
+  isDarkMode,
+  isSidebarOpen,
+}: {
+  isDarkMode: boolean;
+  isSidebarOpen: boolean;
+}) {
+  const iconColor = isDarkMode ? "#9D87FE" : "#3C4451";
+  const iconFill = isDarkMode ? "#2A2A3A" : "#E5E7EB";
   return (
-    <div className="mt-auto w-full px-4 py-2 xl:py-3">
-      {endButtonDetails.map((button, index) => (
-        <Button
-          key={index}
-          size="sm"
-          variant="ghost"
-          className="w-full justify-start text-gray-600 hover:text-gray-900"
+    <div className="flex w-full flex-col items-center gap-1 px-2">
+      {endButtonDetails.map((button) => (
+        <button
+          key={button.name}
+          className={cn(
+            "flex w-full items-center gap-3 rounded-lg p-2 text-[#3C4451] transition-all duration-300 hover:bg-gray-300/20 dark:text-[#8f8f9a] dark:hover:bg-[#2A2A3A]",
+            !isSidebarOpen && "w-max justify-center",
+          )}
         >
-          <button.icon size={18} className="mr-2" />
-          <span className="text-sm font-medium">{button.name}</span>
-        </Button>
+          <button.icon size={20} color={iconColor} />
+          {isSidebarOpen && (
+            <span className="whitespace-nowrap text-sm">{button.name}</span>
+          )}
+        </button>
       ))}
     </div>
   );

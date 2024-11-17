@@ -1,4 +1,4 @@
-import { GearIcon } from "@radix-ui/react-icons";
+import { RxDashboard } from "react-icons/rx";
 import {
   BriefcaseBusiness,
   FileText,
@@ -10,8 +10,6 @@ import {
   CircleHelp,
   MessageSquareMore,
 } from "lucide-react";
-import { LayoutDashboard } from "lucide-react";
-import { RxDashboard } from "react-icons/rx";
 
 // Navbar Links
 export const navLinks = [

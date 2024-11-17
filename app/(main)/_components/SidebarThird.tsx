@@ -2,12 +2,14 @@
 import ThemeToggleButton from "@/components/reuseable/ThemeToggleButton";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
+import { LogOut, Menu, X } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import SidebarButtons from "./SidebarButtons";
 import SidebarLinks from "./SidebarLinks";
 import Link from "next/link";
+import SidebarBottomButtons from "./SidebarBottomButtons";
+import { signOut } from "next-auth/react";
 
 function SidebarThird() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -19,7 +21,7 @@ function SidebarThird() {
   return (
     <aside
       className={cn(
-        "relative flex h-screen flex-col items-center gap-4 border-r bg-[#f4f6f9] py-4 transition-all dark:bg-[#1E1D2A]",
+        "relative flex h-screen flex-col items-center gap-3 border-r bg-[#f4f6f9] py-4 transition-all dark:bg-[#1E1D2A]",
         isSidebarOpen ? "w-64" : "w-20",
       )}
     >
@@ -84,6 +86,20 @@ function SidebarThird() {
           isDarkMode={isDarkMode}
           setIsDarkMode={setIsDarkMode}
         />
+
+        <button
+          onClick={() => signOut()}
+          type="submit"
+          className={cn(
+            "flex w-full items-center gap-3 rounded-lg p-2 text-[#3C4451] transition-all duration-300 hover:bg-gray-300/20 dark:text-[#8f8f9a] dark:hover:bg-[#2A2A3A]",
+            !isSidebarOpen && "w-max justify-center",
+          )}
+        >
+          <LogOut size={20} color={iconColor} />
+          {isSidebarOpen && (
+            <span className="whitespace-nowrap text-sm">{"Sign Out"}</span>
+          )}
+        </button>
         {/* <UserBtn /> */}
       </div>
     </aside>

@@ -18,7 +18,6 @@ export const addNewJobApplication = async (jobApplication: JobApplication) => {
     const application = await db.jobApplication.create({
       data: jobApplication,
     });
-    console.log(application);
     return { success: true, application };
   } catch (error: any) {
     return { error: true, errorMessage: error?.message };

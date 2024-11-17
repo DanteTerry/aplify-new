@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { CalendarIcon, FileUp, Loader } from "lucide-react";
-import { format, formatDate } from "date-fns";
+import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -59,11 +59,9 @@ function NewApplicationContent({
   const handleContinue = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     let fieldsToValidate: (keyof TAddApplicationSchema)[] = [];
-
     if (step === 1) {
       fieldsToValidate = ["jobTitle", "companyName"];
     }
-
     const isValid = await trigger(fieldsToValidate);
     if (isValid && step < 4) setStep((prev) => prev + 1);
   };
@@ -96,6 +94,15 @@ function NewApplicationContent({
       (otherFiles as File[]).map((file) => uploadFile(file)),
     );
 
+    if (
+      resumeLink.error ||
+      coverLetterLink.error ||
+      otherFilesLink.some((file) => file.error)
+    ) {
+      toast.error("Failed to upload files, please try again");
+      return;
+    }
+
     const applicationData = {
       ...data,
       userId: "",
@@ -117,7 +124,7 @@ function NewApplicationContent({
         setOpen(false);
       }
     } catch (error) {
-      console.error("Failed to add new job application:", error);
+      toast.error("Failed to add new job application, please try again");
     }
   };
 
