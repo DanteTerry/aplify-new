@@ -31,23 +31,23 @@ const chartConfig = {
     label: "Visitors",
   },
   chrome: {
-    label: "Applied",
+    label: "Chrome",
     color: "hsl(var(--chart-1))",
   },
   safari: {
-    label: "Rejected",
+    label: "Safari",
     color: "hsl(var(--chart-2))",
   },
   firefox: {
-    label: "Saved",
+    label: "Firefox",
     color: "hsl(var(--chart-3))",
   },
   edge: {
-    label: "In Progress",
+    label: "Edge",
     color: "hsl(var(--chart-4))",
   },
   other: {
-    label: "Interview Scheduled",
+    label: "Other",
     color: "hsl(var(--chart-5))",
   },
 } satisfies ChartConfig;
@@ -58,7 +58,7 @@ export function DashboardBar() {
   }, []);
 
   return (
-    <Card className="flex flex-col dark:bg-[#1E1D2A]">
+    <Card className="flex flex-col">
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
@@ -111,7 +111,7 @@ export function DashboardBar() {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-          Total number of Job Application
+          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
         </div>
         <div className="leading-none text-muted-foreground">
           Showing total visitors for the last 6 months
