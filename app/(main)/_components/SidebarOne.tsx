@@ -14,7 +14,7 @@ function SidebarOne() {
 
   return (
     <SessionProvider>
-      <aside className="fixed flex h-screen w-24 flex-col items-center justify-between bg-[#EAE9E3] py-5">
+      <aside className="fixed flex h-screen w-24 flex-col items-center justify-between bg-gradient-to-b from-[#EAE9E3] to-[#D6D5D0] py-5 shadow-lg">
         <div>
           <Image
             src="/logo/aplify.png"
@@ -24,10 +24,13 @@ function SidebarOne() {
           />
         </div>
 
-        <div className="flex flex-col justify-between gap-2 rounded-full bg-white px-2 py-4">
+        <div className="flex flex-col justify-between gap-2 rounded-full bg-white px-2 py-4 shadow-md">
           <div className="flex flex-col gap-2">
             {buttonDetails.map((button) => (
-              <button key={button.name} className="rounded-full p-2">
+              <button
+                key={button.name}
+                className="rounded-full p-2 transition-colors duration-200 hover:bg-gray-200"
+              >
                 <button.icon size={20} color="black" />
               </button>
             ))}
@@ -36,7 +39,7 @@ function SidebarOne() {
                 href={link.href}
                 key={link.name}
                 className={cn(
-                  `rounded-full p-2`,
+                  `rounded-full p-2 transition-colors duration-200 hover:bg-gray-200`,
                   link.href === pathname && "bg-[#201f23]",
                 )}
               >
@@ -49,18 +52,21 @@ function SidebarOne() {
           </div>
           <div className="mt-10 flex flex-col gap-2">
             {endButtonDetails.map((button) => (
-              <button key={button.name} className="rounded-full p-2">
+              <button
+                key={button.name}
+                className="rounded-full p-2 transition-colors duration-200 hover:bg-gray-200"
+              >
                 <button.icon size={20} color="black" />
               </button>
             ))}
           </div>
         </div>
-        <div className="flex flex-col gap-2">
-          <button className="rounded-full p-2">
+        <div className="flex flex-col items-center gap-2">
+          <button className="rounded-full p-2 transition-colors duration-200 hover:bg-gray-200">
             <HiOutlineLogout size={20} color="black" />
           </button>
 
-          <div className="rounded-full">
+          <div className="rounded-full shadow-md">
             <Image
               width={35}
               height={35}
