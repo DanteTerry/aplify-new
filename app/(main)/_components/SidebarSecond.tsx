@@ -10,16 +10,16 @@ function SidebarSecond() {
   const pathName = usePathname();
   console.log(pathName);
   return (
-    <aside className="fixed flex h-screen w-60 flex-col gap-5 bg-[#1f1e30] px-5 py-4">
-      <div className="flex items-center justify-start gap-2 px-4">
+    <aside className="fixed flex h-screen w-64 flex-col gap-5 bg-gradient-to-b from-[#1f1e30] to-[#2c2b3e] px-6 py-6 shadow-lg">
+      <div className="flex items-center justify-start gap-3 px-4">
         <Image src={"/logo/aplify.png"} alt="logo" width={40} height={40} />
         <h3 className="ml-2 text-2xl font-bold text-white">Aplify</h3>
       </div>
-      <div className="flex flex-col items-start gap-2.5">
+      <div className="mt-6 flex flex-col items-start gap-3">
         {buttonDetails.map((button) => (
           <button
             key={button.name}
-            className="flex w-full items-center gap-2 rounded-full p-2 px-3 text-[#8f8f9a]"
+            className="flex w-full items-center gap-3 rounded-full p-3 px-4 text-[#8f8f9a] transition-all duration-300 hover:bg-[#2c2b3e] hover:text-white"
           >
             <button.icon size={20} color="white" />
             {button.name}
@@ -31,7 +31,7 @@ function SidebarSecond() {
             href={link.href}
             key={link.name}
             className={cn(
-              `flex w-full items-center gap-2 rounded-xl p-2 px-3 text-[#8f8f9a]`,
+              `flex w-full items-center gap-3 rounded-xl p-3 px-4 text-[#8f8f9a] transition-all duration-300 hover:bg-[#d8f275] hover:text-black`,
               pathName === link.href && "bg-[#d8f275] text-black",
             )}
           >
@@ -46,7 +46,7 @@ function SidebarSecond() {
         {endButtonDetails.map((button) => (
           <button
             key={button.name}
-            className="flex w-full items-center gap-2 rounded-full p-2 px-3 text-[#8f8f9a]"
+            className="flex w-full items-center gap-3 rounded-full p-3 px-4 text-[#8f8f9a] transition-all duration-300 hover:bg-[#2c2b3e] hover:text-white"
           >
             <button.icon size={20} color="white" />
             {button.name}
@@ -54,13 +54,13 @@ function SidebarSecond() {
         ))}
       </div>
 
-      <div className="relative mt-auto flex h-28 w-full items-end justify-center rounded-xl bg-[#d8f275] pb-3">
-        <div className="absolute -top-4 flex items-center justify-center rounded-full border-[4px] border-[#1f1e30] bg-white p-3">
+      <div className="relative mt-auto flex h-32 w-full items-end justify-center rounded-xl bg-[#d8f275] pb-4 shadow-lg">
+        <div className="absolute -top-5 flex items-center justify-center rounded-full border-[4px] border-[#1f1e30] bg-white p-4 shadow-md">
           <FaLocationArrow size={20} color="black" />
         </div>
 
-        <div className="mt-2 flex flex-col items-center justify-center gap-2">
-          <button className="rounded-full bg-[#1f1e30] px-2 py-1 text-sm font-semibold text-white">
+        <div className="mt-4 flex flex-col items-center justify-center gap-3">
+          <button className="rounded-full bg-[#1f1e30] px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#2c2b3e]">
             Download the Aplify App
           </button>
         </div>
