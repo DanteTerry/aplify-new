@@ -8,7 +8,6 @@ import { FaLocationArrow } from "react-icons/fa";
 
 function SidebarSecond() {
   const pathName = usePathname();
-  console.log(pathName);
   return (
     <aside className="fixed flex h-screen w-64 flex-col gap-5 bg-gradient-to-b from-[#1f1e30] to-[#2c2b3e] px-6 py-6 shadow-2xl">
       <div className="flex items-center justify-start gap-3 px-4">
