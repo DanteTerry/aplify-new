@@ -11,8 +11,8 @@ function SidebarSecond() {
   return (
     <aside className="fixed flex h-screen w-64 flex-col gap-5 bg-gradient-to-b from-[#1f1e30] to-[#2c2b3e] px-6 py-6 shadow-2xl">
       <div className="flex items-center justify-start gap-3 px-4">
-        <Image src={"/logo/aplify.png"} alt="logo" width={40} height={40} />
-        <h3 className="ml-2 text-2xl font-bold text-white">Aplify</h3>
+        <Image src={"/logo/amplify.png"} alt="logo" width={40} height={40} />
+        <h3 className="ml-2 text-2xl font-bold text-white">Amplify</h3>
       </div>
       <div className="mt-6 flex flex-col items-start gap-3">
         {buttonDetails.map((button) => (
@@ -60,7 +60,7 @@ function SidebarSecond() {
 
         <div className="mt-4 flex flex-col items-center justify-center gap-3">
           <button className="rounded-full bg-[#1f1e30] px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#2c2b3e] hover:shadow-lg">
-            Download the Aplify App
+            Download the Amplify App
           </button>
         </div>
       </div>
