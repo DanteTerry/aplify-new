@@ -6,8 +6,39 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaLocationArrow } from "react-icons/fa";
 
+const SidebarButton = ({ icon: Icon, name }: { icon: any; name: string }) => (
+  <button className="flex w-full items-center gap-3 rounded-full p-3 px-4 text-[#8f8f9a] transition-all duration-300 hover:bg-[#2c2b3e] hover:text-white hover:shadow-lg">
+    <Icon size={20} color="white" />
+    {name}
+  </button>
+);
+
+const SidebarLink = ({
+  icon: Icon,
+  name,
+  href,
+  isActive,
+}: {
+  icon: any;
+  name: string;
+  href: string;
+  isActive: boolean;
+}) => (
+  <Link
+    href={href}
+    className={cn(
+      `flex w-full items-center gap-3 rounded-xl p-3 px-4 text-[#8f8f9a] transition-all duration-300 hover:bg-[#d8f275] hover:text-black hover:shadow-lg`,
+      isActive && "bg-[#d8f275] text-black shadow-lg",
+    )}
+  >
+    <Icon size={20} color={isActive ? "black" : "white"} />
+    {name}
+  </Link>
+);
+
 function SidebarSecond() {
   const pathName = usePathname();
+
   return (
     <aside className="fixed flex h-screen w-64 flex-col gap-5 bg-gradient-to-b from-[#1f1e30] to-[#2c2b3e] px-6 py-6 shadow-2xl">
       <div className="flex items-center justify-start gap-3 px-4">
@@ -16,40 +47,29 @@ function SidebarSecond() {
       </div>
       <div className="mt-6 flex flex-col items-start gap-3">
         {buttonDetails.map((button) => (
-          <button
+          <SidebarButton
             key={button.name}
-            className="flex w-full items-center gap-3 rounded-full p-3 px-4 text-[#8f8f9a] transition-all duration-300 hover:bg-[#2c2b3e] hover:text-white hover:shadow-lg"
-          >
-            <button.icon size={20} color="white" />
-            {button.name}
-          </button>
+            icon={button.icon}
+            name={button.name}
+          />
         ))}
 
         {linkDetails.map((link) => (
-          <Link
-            href={link.href}
+          <SidebarLink
             key={link.name}
-            className={cn(
-              `flex w-full items-center gap-3 rounded-xl p-3 px-4 text-[#8f8f9a] transition-all duration-300 hover:bg-[#d8f275] hover:text-black hover:shadow-lg`,
-              pathName === link.href && "bg-[#d8f275] text-black shadow-lg",
-            )}
-          >
-            <link.icon
-              size={20}
-              color={link.href === pathName ? "black" : "white"}
-            />
-            {link.name}
-          </Link>
+            icon={link.icon}
+            name={link.name}
+            href={link.href}
+            isActive={pathName === link.href}
+          />
         ))}
 
         {endButtonDetails.map((button) => (
-          <button
+          <SidebarButton
             key={button.name}
-            className="flex w-full items-center gap-3 rounded-full p-3 px-4 text-[#8f8f9a] transition-all duration-300 hover:bg-[#2c2b3e] hover:text-white hover:shadow-lg"
-          >
-            <button.icon size={20} color="white" />
-            {button.name}
-          </button>
+            icon={button.icon}
+            name={button.name}
+          />
         ))}
       </div>
 
@@ -67,4 +87,5 @@ function SidebarSecond() {
     </aside>
   );
 }
+
 export default SidebarSecond;
