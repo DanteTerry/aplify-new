@@ -16,15 +16,18 @@ function Navbar() {
             sizes="33px"
           />
         </div>
+        <span className="text-xl font-bold text-gray-900 dark:text-white">
+          Aplify
+        </span>
       </Link>
 
       {/* Navigation Links */}
-      <div className="hidden flex-1 items-center justify-center gap-4 md:flex">
+      <div className="hidden flex-1 items-center justify-center gap-6 md:flex">
         {navLinks.map((link, index) => (
           <Link
             key={index}
             href={`/${link.href}`}
-            className="rounded-[8px] px-4 py-2 text-gray-700 transition-all duration-500 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
+            className="rounded-lg px-4 py-2 text-gray-700 transition-all duration-300 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             {link.title}
           </Link>
@@ -32,16 +35,16 @@ function Navbar() {
       </div>
 
       {/* Sign In & Sign Up Buttons */}
-      <div className="ml-auto hidden items-center gap-2 md:flex">
+      <div className="ml-auto hidden items-center gap-4 md:flex">
         <Link
           href="/login"
-          className="rounded-[8px] px-4 py-2 text-gray-700 transition-all duration-500 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
+          className="rounded-lg px-4 py-2 text-gray-700 transition-all duration-300 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
         >
           Login
         </Link>
         <Link
           href="/register"
-          className="rounded-[8px] bg-gray-900 px-4 py-2 text-white transition-all duration-500 hover:shadow-md dark:bg-white dark:text-gray-900"
+          className="rounded-lg bg-blue-600 px-4 py-2 text-white transition-all duration-300 hover:bg-blue-700 hover:shadow-md dark:bg-blue-500 dark:hover:bg-blue-600"
         >
           Get Started
         </Link>
