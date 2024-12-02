@@ -58,6 +58,7 @@ function Navbar() {
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="text-gray-700 focus:outline-none dark:text-gray-300"
+          aria-label="Toggle mobile menu"
         >
           <svg
             className="h-6 w-6"
@@ -77,36 +78,38 @@ function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="absolute left-0 right-0 top-16 bg-white shadow-lg dark:bg-[#0A0A0A] md:hidden">
-          <div className="flex flex-col items-center gap-4 p-4">
-            {navLinks.map((link, index) => (
-              <Link
-                key={index}
-                href={`/${link.href}`}
-                className="w-full rounded-lg px-4 py-2 text-center text-gray-700 transition-all duration-300 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {link.title}
-              </Link>
-            ))}
+      <div
+        className={`absolute left-0 right-0 top-16 bg-white shadow-lg transition-transform duration-300 dark:bg-[#0A0A0A] md:hidden ${
+          isMobileMenuOpen ? "translate-y-0" : "-translate-y-full"
+        }`}
+      >
+        <div className="flex flex-col items-center gap-4 p-4">
+          {navLinks.map((link, index) => (
             <Link
-              href="/login"
+              key={index}
+              href={`/${link.href}`}
               className="w-full rounded-lg px-4 py-2 text-center text-gray-700 transition-all duration-300 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Login
+              {link.title}
             </Link>
-            <Link
-              href="/register"
-              className="w-full rounded-lg bg-blue-600 px-4 py-2 text-center text-white transition-all duration-300 hover:bg-blue-700 hover:shadow-md dark:bg-blue-500 dark:hover:bg-blue-600"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Get Started
-            </Link>
-          </div>
+          ))}
+          <Link
+            href="/login"
+            className="w-full rounded-lg px-4 py-2 text-center text-gray-700 transition-all duration-300 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Login
+          </Link>
+          <Link
+            href="/register"
+            className="w-full rounded-lg bg-blue-600 px-4 py-2 text-center text-white transition-all duration-300 hover:bg-blue-700 hover:shadow-md dark:bg-blue-500 dark:hover:bg-blue-600"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Get Started
+          </Link>
         </div>
-      )}
+      </div>
     </nav>
   );
 }
