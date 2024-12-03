@@ -47,7 +47,7 @@ function Navbar() {
         </Link>
         <Link
           href="/register"
-          className="rounded-lg bg-blue-600 px-4 py-2 text-white transition-all duration-300 hover:bg-blue-700 hover:shadow-md dark:bg-blue-500 dark:hover:bg-blue-600"
+          className="rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 px-4 py-2 text-white transition-all duration-300 hover:from-blue-600 hover:to-indigo-700 hover:shadow-md dark:from-blue-400 dark:to-indigo-500 dark:hover:from-blue-500 dark:hover:to-indigo-600"
         >
           Get Started
         </Link>
@@ -103,7 +103,7 @@ function Navbar() {
           </Link>
           <Link
             href="/register"
-            className="w-full rounded-lg bg-blue-600 px-4 py-2 text-center text-white transition-all duration-300 hover:bg-blue-700 hover:shadow-md dark:bg-blue-500 dark:hover:bg-blue-600"
+            className="w-full rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 px-4 py-2 text-center text-white transition-all duration-300 hover:from-blue-600 hover:to-indigo-700 hover:shadow-md dark:from-blue-400 dark:to-indigo-500 dark:hover:from-blue-500 dark:hover:to-indigo-600"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Get Started
