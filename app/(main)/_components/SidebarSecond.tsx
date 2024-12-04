@@ -9,7 +9,7 @@ import { FaLocationArrow } from "react-icons/fa";
 const SidebarButton = ({ icon: Icon, name }: { icon: any; name: string }) => (
   <button className="flex w-full items-center gap-3 rounded-full p-3 px-4 text-[#8f8f9a] transition-all duration-300 hover:bg-[#2c2b3e] hover:text-white hover:shadow-lg">
     <Icon size={20} color="white" />
-    {name}
+    <span className="ml-2">{name}</span>
   </button>
 );
 
@@ -32,7 +32,7 @@ const SidebarLink = ({
     )}
   >
     <Icon size={20} color={isActive ? "black" : "white"} />
-    {name}
+    <span className="ml-2">{name}</span>
   </Link>
 );
 
