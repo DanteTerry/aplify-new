@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaLocationArrow } from "react-icons/fa";
 
+// sidebar button details
 const SidebarButton = ({ icon: Icon, name }: { icon: any; name: string }) => (
   <button className="flex w-full items-center gap-3 rounded-full p-3 px-4 text-gray-400 transition-all duration-300 hover:bg-gray-700 hover:text-white">
     <Icon size={20} />
@@ -13,6 +14,7 @@ const SidebarButton = ({ icon: Icon, name }: { icon: any; name: string }) => (
   </button>
 );
 
+// sidebar link details
 const SidebarLink = ({
   icon: Icon,
   name,
@@ -36,6 +38,7 @@ const SidebarLink = ({
   </Link>
 );
 
+// sidebar second component
 function SidebarSecond() {
   const pathName = usePathname();
 
