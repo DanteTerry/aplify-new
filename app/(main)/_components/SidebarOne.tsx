@@ -14,14 +14,14 @@ function SidebarOne() {
 
   return (
     <SessionProvider>
-      <aside className="fixed flex h-screen w-24 flex-col items-center justify-between bg-gradient-to-b from-[#f5f7fa] to-[#c3cfe2] py-5 shadow-lg">
-        <div>
+      <aside className="fixed flex h-screen w-24 flex-col items-center justify-between bg-gradient-to-b from-[#f5f7fa] to-[#c3cfe2] py-5 shadow-lg transition-all duration-300 ease-in-out hover:w-28">
+        <div className="flex flex-col items-center">
           <Image
             src="/logo/aplify.png"
             width={40}
             height={40}
             alt="Aplify logo"
-            className="rounded-full"
+            className="mb-5 rounded-full"
           />
         </div>
 
