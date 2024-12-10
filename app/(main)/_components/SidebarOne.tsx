@@ -21,7 +21,7 @@ function SidebarOne() {
             width={40}
             height={40}
             alt="Aplify logo"
-            className="mb-5 rounded-full"
+            className="mb-5 rounded-full transition-transform duration-200 hover:scale-110"
           />
         </div>
 
@@ -67,7 +67,7 @@ function SidebarOne() {
             <HiOutlineLogout size={24} color="black" />
           </button>
 
-          <div className="rounded-full shadow-lg">
+          <div className="rounded-full shadow-lg transition-transform duration-200 hover:scale-110">
             <Image
               width={40}
               height={40}
