@@ -7,7 +7,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { HiOutlineLogout } from "react-icons/hi";
 
-// this is sidebarOne component
 function SidebarOne() {
   const pathname = usePathname();
   const { data } = useSession();
