@@ -14,7 +14,9 @@ function SidebarOne() {
 
   return (
     <SessionProvider>
+      {/* Sidebar container */}
       <aside className="fixed flex h-screen w-24 flex-col items-center justify-between bg-gradient-to-b from-[#f5f7fa] to-[#c3cfe2] py-5 shadow-lg transition-all duration-300 ease-in-out hover:w-28">
+        {/* Logo section */}
         <div className="flex flex-col items-center">
           <Image
             src="/logo/aplify.png"
@@ -25,8 +27,10 @@ function SidebarOne() {
           />
         </div>
 
+        {/* Main buttons and links section */}
         <div className="flex flex-col justify-between gap-4 rounded-2xl bg-white px-3 py-5 shadow-lg">
           <div className="flex flex-col gap-3">
+            {/* Render main buttons */}
             {buttonDetails.map((button) => (
               <button
                 key={button.name}
@@ -35,6 +39,7 @@ function SidebarOne() {
                 <button.icon size={24} color="black" />
               </button>
             ))}
+            {/* Render navigation links */}
             {linkDetails.map((link) => (
               <Link
                 href={link.href}
@@ -51,6 +56,7 @@ function SidebarOne() {
               </Link>
             ))}
           </div>
+          {/* Render end buttons */}
           <div className="mt-10 flex flex-col gap-3">
             {endButtonDetails.map((button) => (
               <button
@@ -62,11 +68,15 @@ function SidebarOne() {
             ))}
           </div>
         </div>
+
+        {/* User section */}
         <div className="flex flex-col items-center gap-3">
+          {/* Logout button */}
           <button className="rounded-full p-3 transition-transform duration-200 hover:scale-110 hover:bg-gray-200">
             <HiOutlineLogout size={24} color="black" />
           </button>
 
+          {/* User profile image */}
           <div className="rounded-full shadow-lg transition-transform duration-200 hover:scale-110">
             <Image
               width={40}
@@ -81,4 +91,5 @@ function SidebarOne() {
     </SessionProvider>
   );
 }
+
 export default SidebarOne;
