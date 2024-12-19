@@ -1,17 +1,17 @@
 "use client";
-import { buttonDetails, endButtonDetails, linkDetails } from "@/constants";
-import { cn } from "@/lib/utils";
+import { FC } from "react";
 import { SessionProvider, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { HiOutlineLogout } from "react-icons/hi";
-import { FC } from "react";
+import { buttonDetails, endButtonDetails, linkDetails } from "@/constants";
+import { cn } from "@/lib/utils";
 
 const SidebarOne: FC = () => {
   const pathname = usePathname();
-  const { data } = useSession();
-  const user = data?.user;
+  const { data: session } = useSession();
+  const user = session?.user;
 
   return (
     <SessionProvider>
@@ -28,37 +28,34 @@ const SidebarOne: FC = () => {
 
         <div className="flex flex-col justify-between gap-4 rounded-2xl bg-white px-3 py-5 shadow-lg">
           <div className="flex flex-col gap-3">
-            {buttonDetails.map((button) => (
+            {buttonDetails.map(({ name, icon: Icon }) => (
               <button
-                key={button.name}
+                key={name}
                 className="rounded-full p-3 transition-transform duration-200 hover:scale-110 hover:bg-gray-200"
               >
-                <button.icon size={24} color="black" />
+                <Icon size={24} color="black" />
               </button>
             ))}
-            {linkDetails.map((link) => (
+            {linkDetails.map(({ name, href, icon: Icon }) => (
               <Link
-                href={link.href}
-                key={link.name}
+                href={href}
+                key={name}
                 className={cn(
                   `rounded-full p-3 transition-transform duration-200 hover:scale-110 hover:bg-gray-200`,
-                  link.href === pathname && "bg-[#201f23]",
+                  href === pathname && "bg-[#201f23]",
                 )}
               >
-                <link.icon
-                  size={24}
-                  color={link.href === pathname ? "white" : "black"}
-                />
+                <Icon size={24} color={href === pathname ? "white" : "black"} />
               </Link>
             ))}
           </div>
           <div className="mt-10 flex flex-col gap-3">
-            {endButtonDetails.map((button) => (
+            {endButtonDetails.map(({ name, icon: Icon }) => (
               <button
-                key={button.name}
+                key={name}
                 className="rounded-full p-3 transition-transform duration-200 hover:scale-110 hover:bg-gray-200"
               >
-                <button.icon size={24} color="black" />
+                <Icon size={24} color="black" />
               </button>
             ))}
           </div>
