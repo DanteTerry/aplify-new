@@ -1,5 +1,5 @@
 "use client";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { SessionProvider, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,7 +11,11 @@ import { cn } from "@/lib/utils";
 const SidebarOne: FC = () => {
   const pathname = usePathname();
   const { data: session } = useSession();
-  const user = session?.user;
+  const [user, setUser] = useState(session?.user);
+
+  useEffect(() => {
+    setUser(session?.user);
+  }, [session]);
 
   return (
     <SessionProvider>
