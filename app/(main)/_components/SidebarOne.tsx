@@ -19,7 +19,7 @@ const SidebarOne: FC = () => {
 
   return (
     <SessionProvider>
-      <aside className="fixed flex h-screen w-24 flex-col items-center justify-between bg-gradient-to-b from-[#1e3a8a] to-[#3b82f6] py-5 shadow-lg transition-all duration-300 ease-in-out hover:w-28">
+      <aside className="fixed flex h-screen w-20 flex-col items-center justify-between bg-gradient-to-b from-blue-900 to-blue-500 py-5 shadow-lg transition-all duration-300 ease-in-out hover:w-24">
         <div className="flex flex-col items-center">
           <Image
             src="/logo/aplify.png"
@@ -46,7 +46,7 @@ const SidebarOne: FC = () => {
                 key={name}
                 className={cn(
                   `rounded-full p-3 transition-transform duration-200 hover:scale-110 hover:bg-gray-200`,
-                  href === pathname && "bg-[#1e3a8a]",
+                  href === pathname && "bg-blue-900 text-white",
                 )}
               >
                 <Icon size={24} color={href === pathname ? "white" : "black"} />
