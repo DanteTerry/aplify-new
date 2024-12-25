@@ -18,7 +18,7 @@ const SidebarOne: FC = () => {
   }, [session]);
 
   return (
-    <aside className="fixed flex h-screen w-20 flex-col items-center justify-between bg-gradient-to-b from-blue-900 to-blue-500 py-5 shadow-lg transition-all duration-300 ease-in-out hover:w-24">
+    <aside className="border-gradient-to-b fixed flex h-screen w-20 flex-col items-center justify-between border-r-4 bg-gradient-to-b from-purple-500 from-purple-900 to-purple-500 to-purple-900 py-5 shadow-lg transition-all duration-300 ease-in-out hover:w-24">
       <Image
         src="/logo/aplify.png"
         width={40}
@@ -33,7 +33,7 @@ const SidebarOne: FC = () => {
           {buttonDetails.map(({ name, icon: Icon }) => (
             <button
               key={name}
-              className="group relative rounded-full p-3 transition-transform duration-200 hover:scale-110 hover:bg-gray-200"
+              className="group relative rounded-full p-3 transition-transform duration-200 hover:scale-110 hover:bg-purple-200"
             >
               <Icon size={24} color="black" />
               <span className="absolute left-12 top-1/2 -translate-y-1/2 whitespace-nowrap rounded bg-black px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
@@ -46,8 +46,8 @@ const SidebarOne: FC = () => {
               href={href}
               key={name}
               className={cn(
-                `group relative rounded-full p-3 transition-transform duration-200 hover:scale-110 hover:bg-gray-200`,
-                href === pathname && "bg-blue-900 text-white",
+                `group relative rounded-full p-3 transition-transform duration-200 hover:scale-110 hover:bg-purple-200`,
+                href === pathname && "bg-purple-900 text-white",
               )}
             >
               <Icon size={24} color={href === pathname ? "white" : "black"} />
@@ -61,7 +61,7 @@ const SidebarOne: FC = () => {
           {endButtonDetails.map(({ name, icon: Icon }) => (
             <button
               key={name}
-              className="group relative rounded-full p-3 transition-transform duration-200 hover:scale-110 hover:bg-gray-200"
+              className="group relative rounded-full p-3 transition-transform duration-200 hover:scale-110 hover:bg-purple-200"
             >
               <Icon size={24} color="black" />
               <span className="absolute left-12 top-1/2 -translate-y-1/2 whitespace-nowrap rounded bg-black px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
@@ -73,7 +73,7 @@ const SidebarOne: FC = () => {
       </div>
 
       <div className="flex flex-col items-center gap-3">
-        <button className="group relative rounded-full p-3 transition-transform duration-200 hover:scale-110 hover:bg-gray-200">
+        <button className="group relative rounded-full p-3 transition-transform duration-200 hover:scale-110 hover:bg-purple-200">
           <HiOutlineLogout size={24} color="black" />
           <span className="absolute left-12 top-1/2 -translate-y-1/2 whitespace-nowrap rounded bg-black px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
             Logout
@@ -85,7 +85,7 @@ const SidebarOne: FC = () => {
               width={40}
               height={40}
               src={user.image}
-              className="rounded-full"
+              className="rounded-full shadow-md"
               alt="user image"
             />
           </div>
