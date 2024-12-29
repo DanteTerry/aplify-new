@@ -75,7 +75,7 @@ function SidebarSecond() {
       </div>
       <div className="mt-auto flex flex-col items-center gap-4 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 p-4 shadow-xl">
         <div className="flex items-center justify-center rounded-full border-4 border-gray-800 bg-white p-4 shadow-md">
-          <FaLocationArrow size={20} className="text-blue-500" />
+          <FaLocationArrow size={20} className="animate-bounce text-blue-500" />
         </div>
         <button className="rounded-full bg-gray-800 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:bg-gray-600">
           Download the Amplify App
