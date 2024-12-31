@@ -30,7 +30,7 @@ const SidebarOne: FC = () => {
   };
 
   return (
-    <aside className="border-gradient-to-r fixed flex h-screen w-20 flex-col items-center justify-between border-r-4 bg-gradient-to-b from-pink-500 from-purple-500 via-purple-700 via-red-500 to-purple-900 to-yellow-500 py-5 shadow-lg transition-all duration-300 ease-in-out hover:w-24">
+    <aside className="fixed flex h-screen w-20 flex-col items-center justify-between border-r-4 bg-gradient-to-b from-pink-500 via-purple-700 to-yellow-500 py-5 shadow-lg transition-all duration-300 ease-in-out hover:w-24">
       <Image
         src="/logo/aplify.png"
         width={40}
@@ -45,7 +45,7 @@ const SidebarOne: FC = () => {
           {buttonDetails.map(({ name, icon: Icon }) => (
             <button
               key={name}
-              className="group relative rounded-full from-purple-300 to-purple-500 p-3 shadow-md transition-transform duration-200 hover:scale-110 hover:bg-gradient-to-r"
+              className="group relative rounded-full bg-gradient-to-r from-purple-300 to-purple-500 p-3 shadow-md transition-transform duration-200 hover:scale-110 hover:from-purple-400 hover:to-purple-600"
             >
               <Icon size={24} color="black" />
               <Tooltip text={name} />
@@ -56,7 +56,7 @@ const SidebarOne: FC = () => {
               href={href}
               key={name}
               className={cn(
-                `group relative rounded-full from-purple-300 to-purple-500 p-3 shadow-md transition-transform duration-200 hover:scale-110 hover:bg-gradient-to-r`,
+                `group relative rounded-full bg-gradient-to-r from-purple-300 to-purple-500 p-3 shadow-md transition-transform duration-200 hover:scale-110 hover:from-purple-400 hover:to-purple-600`,
                 href === pathname && "bg-purple-900 text-white",
               )}
             >
@@ -69,7 +69,7 @@ const SidebarOne: FC = () => {
           {endButtonDetails.map(({ name, icon: Icon }) => (
             <button
               key={name}
-              className="group relative rounded-full from-purple-300 to-purple-500 p-3 shadow-md transition-transform duration-200 hover:scale-110 hover:bg-gradient-to-r"
+              className="group relative rounded-full bg-gradient-to-r from-purple-300 to-purple-500 p-3 shadow-md transition-transform duration-200 hover:scale-110 hover:from-purple-400 hover:to-purple-600"
             >
               <Icon size={24} color="black" />
               <Tooltip text={name} />
@@ -80,7 +80,7 @@ const SidebarOne: FC = () => {
 
       <div className="flex flex-col items-center gap-3">
         <button
-          className="group relative rounded-full from-purple-300 to-purple-500 p-3 shadow-md transition-transform duration-200 hover:scale-110 hover:bg-gradient-to-r"
+          className="group relative rounded-full bg-gradient-to-r from-purple-300 to-purple-500 p-3 shadow-md transition-transform duration-200 hover:scale-110 hover:from-purple-400 hover:to-purple-600"
           onClick={toggleDarkMode}
         >
           {darkMode ? (
@@ -90,7 +90,7 @@ const SidebarOne: FC = () => {
           )}
           <Tooltip text="Toggle Dark Mode" />
         </button>
-        <button className="group relative rounded-full from-purple-300 to-purple-500 p-3 shadow-md transition-transform duration-200 hover:scale-110 hover:bg-gradient-to-r">
+        <button className="group relative rounded-full bg-gradient-to-r from-purple-300 to-purple-500 p-3 shadow-md transition-transform duration-200 hover:scale-110 hover:from-purple-400 hover:to-purple-600">
           <HiOutlineLogout size={24} color="black" />
           <Tooltip text="Logout" />
         </button>
