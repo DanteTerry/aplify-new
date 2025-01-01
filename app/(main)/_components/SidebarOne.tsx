@@ -30,7 +30,7 @@ const SidebarOne: FC = () => {
   };
 
   return (
-    <aside className="fixed flex h-screen w-20 flex-col items-center justify-between border-r-4 bg-gradient-to-b from-pink-500 via-purple-700 to-yellow-500 py-5 shadow-lg transition-all duration-300 ease-in-out hover:w-24">
+    <aside className="fixed flex h-screen w-16 flex-col items-center justify-between border-r-4 bg-gradient-to-b from-pink-500 via-purple-700 to-yellow-500 py-5 shadow-lg transition-all duration-300 ease-in-out hover:w-24 sm:w-20 sm:hover:w-24 md:w-24 md:hover:w-32 lg:w-32 lg:hover:w-40">
       <Image
         src="/logo/aplify.png"
         width={40}
